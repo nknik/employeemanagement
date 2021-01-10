@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['127.0.0.1','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'data.apps.DataConfig', # new app for the emp data 
+   # 'data.apps.DataConfig', # new app for the emp data 
     'profilee.apps.ProfileeConfig', # new app for the emp profile
     'ac.apps.AcConfig', # new app for the emp profile
     'django.contrib.admin',
