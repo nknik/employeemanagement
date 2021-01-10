@@ -1,0 +1,50 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% static "images" as baseUrl %}
+{% block content %}
+<!-- <form action="index"> 
+	<a href="index"><button>Go Back</button></a>
+<center>
+	{% csrf_token %} 
+	<fieldset ="">
+
+	{{ form.as_p }} 
+    </fieldset> 
+
+	 
+</form> 
+</center> -->
+<center>
+<div class="modal-body">
+	*Edit here
+	<form style="border: 10px;" action="/{{tab.id}}/editmodel" method="post">
+	  {% csrf_token %}
+	  <fieldset>
+		<label for="empid">Employee id:</label>
+		<input type="text" name="empid" id="" value="{{tab.empid}}" > <br><br>
+		<label for="fname">First name:</label>
+		<input type="text" name="fname" id="" value="{{tab.fname}}" > <br><br>
+		<label for="lname">Last Name:</label>
+		<input type="text" name="lname" id=""value="{{tab.lname}}" ><br><br>
+		<label for="address">Address:</label> <br>
+		<!-- <input type="text" maxlength="100" name="{{tab.address}}" id=""value="lorem1ssssssssssssssss " ><br><br> -->
+	   <textarea name="address" id="" cols="29" rows="5" >{{tab.address}}</textarea> <br><br>
+		<label for="date">Date Of Birth:</label> 
+		<input type="date" name="dob" id="" data-date-format="MMMM DD YYYY" value="{{tab.DOB|date:'Y-m-d'}}" ><br><br>
+		<label for="mob">Mobile No.:</label> 
+		<input type="number" minlength="10" name="mob" value="{{tab.mob}}" id="" ><br><br>
+		<label for="city">City:</label>
+		<input type="text" name="city" id="" maxlength="20" value="{{tab.city}}" ><br><br>
+    </fieldset>
+    {% for message in messages %}
+    <h3 style="color: red;"> {{message}}  </h3>
+    {% endfor %}
+	<!-- <input type="reset" class="btn btn-secondary" value="Reset"> -->
+	<input type="submit" class="btn btn-primary" href="#" value="Submit">
+	<!-- <a class="btn btn-primary" href="#">Logout</a> -->
+	</form>
+  </div>
+  <a href="/index"><button type= class="btn btn-primary" > Go Back</button></a>
+
+</center>
+{% endblock %}

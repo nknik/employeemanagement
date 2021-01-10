@@ -1,0 +1,49 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% static "images" as baseUrl %}
+{% block content %}
+<!-- <form action="index"> 
+	<a href="index"><button>Go Back</button></a>
+<center>
+	{% csrf_token %} 
+	<fieldset disabled="disabled">
+
+	{{ form.as_p }} 
+    </fieldset> 
+
+	 
+</form> 
+</center> -->
+<center>
+	{% for ii in tab %}
+<div class="modal-body">
+	*view only
+	<form style="border: 10px;" action="" method="post">
+	  {% csrf_token %}
+	  <fieldset disabled="disabled">
+		<label for="empid">Employee id:</label>
+		<input type="text" name="empid" id="" value="{{ii.empid}}" disabled> <br><br>
+		<label for="fname">First name:</label>
+		<input type="text" name="fname" id="" value="{{ii.fname}}" disabled> <br><br>
+		<label for="lname">Last Name:</label>
+		<input type="text" name="lname" id=""value="{{ii.lname}}" disabled><br><br>
+		<label for="address">Address:</label>
+		<input type="text" maxlength="100" name="{{ii.address}}" id=""value="lorem1ssssssssssssssss " disabled><br><br>
+	   <textarea name="" id="" cols="29" rows="5" >{{ii.address}}</textarea> <br><br>
+		<label for="date">Date Of Birth:</label> 
+		<input type="date" name="dob" id="" data-date-format="MMMM DD YYYY" value="{{ii.DOB|date:'Y-m-d'}}" disabled><br><br>
+		<label for="mob">Mobile No.:</label> 
+		<input type="number" minlength="10" name="mob" value="{{ii.mob}}" id="" disabled><br><br>
+		<label for="city">City:</label>
+		<input type="text" name="city" id="" maxlength="20" value="{{ii.city}}" disabled><br><br>
+	  </fieldset>
+	<!-- <input type="reset" class="btn btn-secondary" value="Reset">
+	<input type="submit" class="btn btn-primary" href="#" value="Submit"> -->
+	<!-- <a class="btn btn-primary" href="#">Logout</a> -->
+	</form>
+  </div>
+  <a href="/index"><button type= class="btn btn-primary" > Go Back</button></a>
+
+</center>
+{% endfor %}
+{% endblock %}

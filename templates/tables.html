@@ -1,0 +1,465 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% static "images" as baseUrl %}
+{% block content %}
+<!-- <link rel="stylesheet"  href="{% static 'css/elements.css'%}" /> -->
+<script src="{% static 'js/my_js.js' %}"></script>	
+        <!-- Begin Page Content -->
+        <div
+        class="d-sm-flex align-items-center justify-content-between mb-4"
+      >
+        <h1 class="h3 mb-0 text-gray-800"></h1>
+        <a href="#"
+        data-toggle="modal"
+        data-target="#submitmodel">
+          <button id = "popup" onclick ="div_show()"
+          href="#"
+          class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+          ><i class="fa fa-plus" aria-hidden="true"></i> Add Employee</button
+        >
+        </a>
+      </div>
+        <div
+        class="d-sm-flex align-items-center justify-content-between mb-4"
+      >
+        <h1 class="h3 mb-0 text-gray-800"></h1>
+        <!-- <a href="#"
+        data-toggle="modal"
+        data-target="#1viewmodel">
+          <button id = "popup" onclick ="div_show()"
+          href="#"
+          class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+          ><i class="fa fa-plus" aria-hidden="true"></i> Add Employee</button
+        >
+        </a> -->
+      </div>
+        <div id="content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="container-fluid">
+          
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+          {% for message in messages %}
+          <h3 style="color: red;"> {{message}}  </h3>
+          {% endfor %}
+          <p class="mb-4">Any problem Write at us <a href="mailto:nikhilchalikwar@gmail.com">Here</a></p>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Employees</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Mobile</th>
+                    <th>Options</th>
+                      <!-- <th>Amount</th> -->
+                  </thead>
+
+                   
+                  <tfoot>
+                    <tr>
+                      <th>ID</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Mobile</th>
+                      <th>Options</th>
+                      <!-- <th>Amount</th> -->
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <!-- <tr>
+                    <td>1</td>
+                    <td>nk</td>
+                    <td>nk</td>
+                    <td> <i class="fa fa-phone" aria-hidden="true"></i> nk</td>
+                    <td>
+                      <a href=""><i class="fa fa-eye" aria-hidden="true"></i>   </a>
+                      <a href=""><i class="fas fa-edit"></i>    </a>
+                      <a href=""><i class="fa fa-trash" aria-hidden="true"></i>   </a>   
+                    </td>
+                    </tr> -->
+                {% for i in tab %}
+
+                  <tr>
+                    <td>{{i.empid}}</td>
+                    <td>{{i.fname}}</td>
+                    <td>{{i.lname}}</td>
+                    <td>{{i.mob}} <i class="fa fa-phone" aria-hidden="true"></i> </td>
+                    <td>
+
+                      <a href="{{i.empid}}/viewmodel"><i class="fa fa-eye" aria-hidden="true"></i>   </a>
+                      <a href="{{i.id}}/editmodel"><i class="fas fa-edit"></i>    </a>
+                      <a href="{{i.id}}/deletemodel" onclick="return confirm('Are you sure?'); class="confirm-delete" ><i class="fa fa-trash" aria-hidden="true"></i>   </a>
+                    </td>
+                    <!-- <td>{{i.times}}+5:30</td> -->
+                    <!-- <td>₹ {{i.price}}</td> -->
+                  </tr>
+
+                  {% endfor %}
+                    <!-- <tr>
+                      <td>Tiger Nixon</td>
+                      <td>System Architect</td>
+                      <td>Edinburgh</td>
+                      <td>61</td>
+                      <td>2011/04/25</td>
+                      <td>₹320,800</td>
+                    </tr>
+                    <tr>
+                      <td>Garrett Winters</td>
+                      <td>Accountant</td>
+                      <td>Tokyo</td>
+                      <td>63</td>
+                      <td>2011/07/25</td>
+                      <td>₹170,750</td>
+                    </tr> -->
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+       <!-- Logout Modal-->
+       <!-- +++++++++++++submitmodel++++++++++++++++++++++ -->
+    <div
+    class="modal fade"
+    id="submitmodel"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
+          <button
+            class="close"
+            type="button"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          *all fields are mandatory
+          <form  action="addemp" method="post">
+            {% csrf_token %}
+
+            <label for="empid">Employee id:</label>
+            <input type="text" name="empid" id="" value="111111"> <br><br>
+            <label for="fname">First name:</label>
+            <input type="text" name="fname" id="" value="Nikhil"> <br><br>
+            <label for="lname">Last Name:</label>
+            <input type="text" name="lname" id=""value="Chalikwar"><br><br>
+            <label for="address">Address:</label>
+            <input type="text" maxlength="100" name="address" id=""value="lorem1ssssssssssssssss "><br><br>
+            <label for="date">Date Of Birth:</label>
+            <input type="date" name="dob" id="" value="1998-01-06"><br><br>
+            <label for="mob">Mobile No.:</label>
+            <input type="number" minlength="10" name="mob" value="9156048120" id=""><br><br>
+            <label for="city">City:</label>
+            <input type="text" name="city" id="" maxlength="20" value="Nanded"><br><br>
+            <!-- {% for message in messages %}
+            <h3 style="color: red;"> {{message}}  </h3>
+            {% endfor %} -->
+            <input type="reset" class="btn btn-secondary" value="Reset">
+          <input type="submit" class="btn btn-primary" href="" value="Submit">
+          <!-- <a class="btn btn-primary" href="#">Logout</a> -->
+          </form>
+        </div>
+        <div class="modal-footer">
+                     <!-- <button
+            class="btn btn-secondary"
+            type="button"
+            data-dismiss="modal"
+          >
+            Cancel
+          </button> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Logout Modal-->
+       <!-- +++++++++++++submitmodel++++++++++++++++++++++ -->
+       <!-- +++++++++++++viewmodel++++++++++++++++++++++ -->
+
+       <!-- Logout Modal-->
+    <div
+    class="modal fade"
+    id="editmodel"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Employee</h5>
+          <button
+            class="close"
+            type="button"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          *Edit employee details here....
+          <form action="" method="post">
+            {% csrf_token %}
+            <label for="empid">Employee id:</label>
+            <input type="text" name="empid" id="" value="111111"> <br><br>
+            <label for="fname">First name:</label>
+            <input type="text" name="fname" id="" value="Nikhil"> <br><br>
+            <label for="lname">Last Name:</label>
+            <input type="text" name="lname" id=""value="Chalikwar"><br><br>
+            <label for="address">Address:</label>
+            <input type="text" maxlength="100" name="address" id=""value="lorem1ssssssssssssssss "><br><br>
+            <label for="date">Date Of Birth:</label>
+            <input type="date" name="dob" id="" value="1998-01-06"><br><br>
+            <label for="mob">Mobile No.:</label>
+            <input type="number" minlength="10" name="mob" value="9156048120" id=""><br><br>
+            <label for="city">City:</label>
+            <input type="text" name="city" id="" maxlength="20" value="Nanded"><br><br>
+          <input type="reset" class="btn btn-secondary" value="Reset">
+          <input type="submit" class="btn btn-primary" href="#" value="Submit">
+          <!-- <a class="btn btn-primary" href="#">Logout</a> -->
+          </form>
+        </div>
+        <div class="modal-footer">
+                     <!-- <button
+            class="btn btn-secondary"
+            type="button"
+            data-dismiss="modal"
+          >
+            Cancel
+          </button> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Logout Modal-->
+       <!-- +++++++++++++editmodel++++++++++++++++++++++ -->
+       <!-- +++++++++++++viewmodel++++++++++++++++++++++ -->
+{% for ii in tab %}
+       <!-- Logout Modal-->
+       <div
+       class="modal fade"
+       id="1viewmodel"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="exampleModalLabel"
+       aria-hidden="true"
+     >
+       <div class="modal-dialog" role="document">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLabel">View Employee</h5>
+             <button
+               class="close"
+               type="button"
+               data-dismiss="modal"
+               aria-label="Close"
+             >
+               <span aria-hidden="true">×</span>
+             </button>
+           </div>
+           <div class="modal-body">
+             *view only
+             <form action="" method="post">
+               {% csrf_token %}
+               <label for="empid">Employee id:</label>
+               <input type="text" name="empid" id="" value="{{ii.empid}}" disabled> <br><br>
+               <label for="fname">First name:</label>
+               <input type="text" name="fname" id="" value="{{ii.fname}" disabled> <br><br>
+               <label for="lname">Last Name:</label>
+               <input type="text" name="lname" id=""value="{{ii.lname}" disabled><br><br>
+               <label for="address">Address:</label>
+               <input type="text" maxlength="100" name="{{ii.address}}" id=""value="lorem1ssssssssssssssss " disabled><br><br>
+               <label for="date">Date Of Birth:</label>
+               <input type="date" name="dob" id="" value="{{ii.dob}}" disabled><br><br>
+               <label for="mob">Mobile No.:</label>
+               <input type="number" minlength="10" name="mob" value="{{ii.mob}}" id="" disabled><br><br>
+               <label for="city">City:</label>
+               <input type="text" name="city" id="" maxlength="20" value="{{ii.city}}" disabled><br><br>
+             <!-- <input type="reset" class="btn btn-secondary" value="Reset">
+             <input type="submit" class="btn btn-primary" href="#" value="Submit"> -->
+             <!-- <a class="btn btn-primary" href="#">Logout</a> -->
+             </form>
+           </div>
+           <div class="modal-footer">
+                        <!-- <button
+               class="btn btn-secondary"
+               type="button"
+               data-dismiss="modal"
+             >
+               Cancel
+             </button> -->
+   
+           </div>
+         </div>
+       </div>
+     </div>
+   <!-- Logout Modal-->
+{% endfor %}
+       <!-- +++++++++++++viewmodel++++++++++++++++++++++ -->
+
+       <!-- +++++++++++++logout++++++++++++++++++++++ -->
+
+<div
+class="modal fade"
+id="logoutModal"
+tabindex="-1"
+role="dialog"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+      <button
+        class="close"
+        type="button"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Select our current session.Thank you
+      <form method="POST" enctype="multipart/form-data"> 
+  
+        <!-- Security token -->
+        {% csrf_token %} 
+      
+        <!-- Using the formset -->
+        {{ form.as_p }} 
+          
+        <input type="submit" value="Submit"> 
+    </form> 
+      <!-- <form action="" method="post">
+        <input type="text" placeholder="first name">
+        <input type="text" placeholder="first name">
+        <input type="text" placeholder="first n">
+      </form> -->
+    </div>
+    <div class="modal-footer">
+      <button
+        class="btn btn-secondary"
+        type="button"
+        data-dismiss="modal"
+      >
+        Cancel
+      </button>
+      <a class="btn btn-primary" href="/logout">Logout</a>
+    </div>
+  </div>
+</div>
+</div>
+       <!-- +++++++++++++logout++++++++++++++++++++++ -->
+
+<div
+class="modal fade"
+id="logoutModal"
+tabindex="-1"
+role="dialog"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+      <button
+        class="close"
+        type="button"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Select our current session.Thank you
+      <form method="POST" enctype="multipart/form-data"> 
+  
+        <!-- Security token -->
+        {% csrf_token %} 
+      
+        <!-- Using the formset -->
+        {{ form.as_p }} 
+          
+        <input type="submit" value="Submit"> 
+    </form> 
+      <!-- <form action="" method="post">
+        <input type="text" placeholder="first name">
+        <input type="text" placeholder="first name">
+        <input type="text" placeholder="first n">
+      </form> -->
+    </div>
+    <div class="modal-footer">
+      <button
+        class="btn btn-secondary"
+        type="button"
+        data-dismiss="modal"
+      >
+        Cancel
+      </button>
+      <a class="btn btn-primary" href="/logout">Logout</a>
+    </div>
+  </div>
+</div>
+</div>
+       <!-- +++++++++++++editmodel++++++++++++++++++++++ -->
+
+<!-- Bootstrap core JavaScript-->
+<script>$(document).on('click', '.confirm-delete', function(){
+  return confirm('Are you sure you want to delete this?');
+})</script>
+<script src=" {% static 'vendor/jquery/jquery.min.js'%}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{% static 'js/sb-admin-2.min.js'%}"></script>
+
+<!-- Page level plugins -->
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{% static 'js/demo/datatables-demo.js'%}"></script>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!-- {% extends 'base.html' %} 
+{% load static %}
+{% static "images" as baseUrl %}
+{% block content %} -->
+
+
+<form action="/{{tab.id}}/deletemodel" method="post">
+	{% csrf_token %}
+	<center><h1>Confirm You want to delete</h1>
+		<fieldset disabled="disabled">
+			<label for="empid">Employee id:</label>
+			<input type="text" name="empid" id="" value="{{tab.empid}}" disabled> <br><br>
+			<label for="fname">First name:</label>
+			<input type="text" name="fname" id="" value="{{tab.fname}}" disabled> <br><br>
+			<label for="lname">Last Name:</label>
+			<input type="text" name="lname" id=""value="{{tab.lname}}" disabled><br><br>
+			<label for="address">Address:</label>
+			<input type="text" maxlength="100" name="{{tab.address}}" id=""value="lorem1ssssssssssssssss " disabled><br><br>
+		   <textarea name="" id="" cols="29" rows="5" >{{tab.address}}</textarea> <br><br>
+			<label for="date">Date Of Birth:</label> 
+			<input type="date" name="dob" id="" data-date-format="MMMM DD YYYY" value="{{tab.DOB|date:'Y-m-d'}}" disabled><br><br>
+			<label for="mob">Mobile No.:</label> 
+			<input type="number" minlength="10" name="mob" value="{{tab.mob}}" id="" disabled><br><br>
+			<label for="city">City:</label>
+			<input type="text" name="city" id="" maxlength="20" value="{{tab.city}}" disabled><br><br>
+		  </fieldset>
+		<button onclick="return confirm('Are you sure?');">Delete</button></center>
+  </form>
+<!-- {% endblock %} -->
