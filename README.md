@@ -1,6 +1,15 @@
 "# employeemanagement"
 Assignment
+#check code quality here https://app.codegrip.tech/projects/shared-dashboard?key=eyJwIjoxOTUzLCJlIjoibmlraGlsY2hhbGlrd2FyQGdtYWlsLmNvbSJ9
 
+==============================================================
+to run
+clone it first
+pip install -r requirements.txt
+python manage.py createsuperuser
+python manage.py makemigrations
+python manage.py runserver
+===============================================================
 Entity:- Manager
 Properties: email, firstname,lastname,password,address,dob,company etc.
 
