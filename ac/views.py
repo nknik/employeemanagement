@@ -55,9 +55,8 @@ def addemp(request):
             pass
             messages.info(request,'except!!!')
     return render(request, 'tables.html')
-    return redirect('index')
-    # return render(request, 'index')
-# from twilio.rest import Client
+
+
 
 @login_required(login_url='/login')
 def viewmodel(request,id): 
@@ -219,7 +218,5 @@ def register(request):
 
 @login_required(login_url='/login')
 def logout(request):
-    auth.logout(request)
-    # logout_mesaage()
-    # return redirect('/')       
+    auth.logout(request)  
     return redirect('login')   
